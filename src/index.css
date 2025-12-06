@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* όλα τα parent elements έχουν ύψος */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  width: 100%;
+}
+
+/* body full height flex */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* optional για debugging */
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.leaflet-marker-icon,
+.leaflet-marker-icon img {
+  border: none !important;
+  background: none !important;
+}
