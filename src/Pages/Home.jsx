@@ -1,14 +1,15 @@
-import { useEffect } from "react";
 import Map from "../Map/Map";
-import useFlightsQuery from "../Services/useFlightsQuery";
-import { useQuery } from "@tanstack/react-query";
+import { FlightsContextProvider } from "../Context/FlightsContext";
+import { MapContextProvider } from "../Context/MapContext";
 
 const Home = () => {
-  const { data, isLoading, error } = useQuery(useFlightsQuery());
-
   return (
     <div className="flex flex-col h-full w-full">
-      <Map flights={data} />
+      <FlightsContextProvider>
+        <MapContextProvider>
+          <Map />
+        </MapContextProvider>
+      </FlightsContextProvider>
     </div>
   );
 };

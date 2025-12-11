@@ -1,8 +1,11 @@
 export const movementModeling = (trueTrack, velocity, lat, lon, deltaTime) => {
-  if (!trueTrack || !velocity) return { newLat: lat, newLon: lon };
+  if (trueTrack == null || velocity == null)
+    return { newLat: lat, newLong: lon };
 
   const angle = (trueTrack * Math.PI) / 180;
-  const distance = velocity * deltaTime;
+  const deltaSeconds = deltaTime / 1000;
+
+  const distance = velocity * deltaSeconds;
 
   const northMovement = distance * Math.cos(angle);
   const eastMovement = distance * Math.sin(angle);
@@ -13,6 +16,6 @@ export const movementModeling = (trueTrack, velocity, lat, lon, deltaTime) => {
 
   return {
     newLat: lat + deltaLat,
-    newLon: lon + deltaLon,
+    newLong: lon + deltaLon,
   };
 };

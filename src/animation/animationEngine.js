@@ -3,39 +3,50 @@ import { movementModeling } from "../utils/movementModeling";
 const markersMap = {};
 const animatedState = {};
 const correctionTimers = {};
+export const lastFrameTime = {};
 
-function registerMarker(MarkerInstance, id) {
+export function registerMarker(MarkerInstance, id) {
   markersMap[id] = MarkerInstance;
 }
 
-function updateMarkers(id, newLat, newLong) {
+function updateMarkers(id, newLat, newLon) {
   animatedState[id].lat = newLat;
-  animatedState[id].long = newLong;
+  animatedState[id].lon = newLon;
 }
 
-function getAnimatedState(id, lat, lon, heading, velocity, lastUpdateTime) {
+export function getAnimatedState(
+  id,
+  lat,
+  lon,
+  heading,
+  velocity,
+  lastUpdateTime
+) {
   animatedState[id] = { lat, lon, heading, velocity, lastUpdateTime };
 }
 
 function getCorrectionTimers(id) {
-  correctionTimers[id] = { startTime: now(), finishTime: now() + 1000 };
+  correctionTimers[id] = {
+    startTime: performance.now(),
+    finishTime: performance.now() + 1000,
+  };
 }
 
-function animate(id) {
-  now = now();
-  deltaTime = now - lastFrameTime;
-  lastFrameTime = now;
+export function animate(id) {
+  const now = performance.now();
+  const deltaTime = now - lastFrameTime[id];
+  lastFrameTime[id] = now;
 
   const { newLat, newLong } = movementModeling(
-    heading,
-    velocity,
-    currentAnimatedLat,
-    currentAnimatedLon,
+    animatedState[id].heading,
+    animatedState[id].velocity,
+    animatedState[id].lat,
+    animatedState[id].lon,
     deltaTime
   );
   animatedState[id].lat = newLat;
-  animatedState[id].long = newLong;
+  animatedState[id].lon = newLong;
   markersMap[id].setLatLng([newLat, newLong]);
 
-  requestAnimationFrame(animate);
+  requestAnimationFrame(() => animate(id));
 }

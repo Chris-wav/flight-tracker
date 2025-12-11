@@ -1,3 +1,6 @@
+import planeIconURL from "../assets/airplane.svg";
+import L from "leaflet";
+
 export const getPlaneIcon = (rotation) =>
   L.divIcon({
     html: `
