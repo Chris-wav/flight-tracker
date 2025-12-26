@@ -1,13 +1,17 @@
-import Map from "../Map/Map";
 import { FlightsContextProvider } from "../Context/FlightsContext";
 import { MapContextProvider } from "../Context/MapContext";
+import { UIContextProvider } from "../Context/UIContext";
+import HomeLayout from "./HomeLayout";
 
 const Home = () => {
+  
   return (
-    <div className="flex flex-col h-full w-full">
+    <div className="flex  h-full w-full">
       <FlightsContextProvider>
         <MapContextProvider>
-          <Map />
+          <UIContextProvider>
+            <HomeLayout />
+          </UIContextProvider>
         </MapContextProvider>
       </FlightsContextProvider>
     </div>

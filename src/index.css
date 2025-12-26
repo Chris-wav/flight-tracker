@@ -28,3 +28,6 @@ body {
   border: none !important;
   background: none !important;
 }
+#root > * {
+  flex: 1;
+}

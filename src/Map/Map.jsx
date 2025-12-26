@@ -11,8 +11,12 @@ const Map = () => {
       zoom={5}
       minZoom={2}
       scrollWheelZoom={true}
+      updateWhenIdle={true}
     >
-      <TileLayer url="https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png" />
+      <TileLayer
+        url="https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+        keepBuffer={4}
+      />
       <MapLogic />
       <Markers />{" "}
     </MapContainer>
