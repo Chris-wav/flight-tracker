@@ -4,14 +4,7 @@ import axios from "axios";
 import "dotenv/config";
 const PORT = process.env.PORT || 4000;
 const app = express();
-app.use(
-  cors({
-    origin: [
-      "https://flight-tracker-vert-two.vercel.app",
-      "https://flight-tracker-qdzc3xuwh-chris-wavs-projects.vercel.app",
-    ],
-  })
-);
+app.use(cors({ origin: true }));
 
 let cache = null;
 let lastFetchTime = 0;
