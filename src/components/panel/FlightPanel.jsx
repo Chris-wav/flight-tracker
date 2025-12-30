@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { UIContext } from "../../Context/UIContext";
 import PanelHeader from "./PanelHeader";
+import FlightAirports from "./FlightAirports";
 import FlightGeneralInfo from "./FlightGeneralInfo";
 import HeightInfo from "./HeightInfo";
 import FlightTrackingInfo from "./FlightTrackingInfo";
