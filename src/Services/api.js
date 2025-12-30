@@ -1,17 +1,17 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:4000/api/flights";
-const API_FOR_ROUTE_INFO_URL = "http://localhost:4000/api/flights/aircraft";
+const ROUTE_INFO_URL = "http://localhost:4000/api/flights/aircraft";
 
+/**
+ * Fetches live flight data and normalizes OpenSky response.
+ */
 export const fetchFlights = async () => {
   try {
-    console.log("🚨 FETCH to OpenSky!");
-
-    const response = await axios.get(API_URL, {});
-    console.log(response);
+    const response = await axios.get(API_URL);
 
     return response.data.states
-      .filter((flight) => flight[5] !== null && flight[6] !== null)
+      .filter((flight) => flight[5] != null && flight[6] != null)
       .map((flight) => ({
         icao24: flight[0],
         callsign: flight[1]?.trim() || null,
@@ -32,18 +32,17 @@ export const fetchFlights = async () => {
         positionSource: flight[16],
       }));
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
 
+/**
+ * Fetches route information for a specific aircraft.
+ */
 export const fetchRouteInfo = async (icao24) => {
-  console.log("🚨 FETCH to OpenSky!");
-
-  const response = await axios.get(API_FOR_ROUTE_INFO_URL, {
+  const response = await axios.get(ROUTE_INFO_URL, {
     params: { icao24 },
   });
 
-  console.log(response.data);
   return response.data;
 };
