@@ -48,7 +48,6 @@ const FlightPanel = () => {
       </button>
 
       <PanelHeader />
-      <FlightAirports />
       <FlightGeneralInfo />
       <HeightInfo />
       <FlightTrackingInfo />
