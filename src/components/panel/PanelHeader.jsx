@@ -1,8 +1,12 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { FlightsContext } from "../../Context/FlightsContext";
 import { getAirlineViaCs } from "../../utils/getAirplineFromCallsign";
 import { getFlightStatus } from "../../utils/getFlightStatus";
 
+/**
+ * Header section of the flight details panel.
+ * Displays callsign, ICAO identifier, airline and current flight status.
+ */
 const PanelHeader = () => {
   const { selectedFlight } = useContext(FlightsContext);
   if (!selectedFlight) return null;
@@ -29,14 +33,13 @@ const PanelHeader = () => {
         )}
 
         <span
-          className={`px-2 py-1 rounded-md text-xs font-medium
-            ${
-              flightStatus === "EN ROUTE"
-                ? "bg-blue-100 text-blue-800"
-                : flightStatus === "LANDED"
-                ? "bg-green-100 text-green-800"
-                : "bg-gray-100 text-gray-500"
-            }`}
+          className={`px-2 py-1 rounded-md text-xs font-medium ${
+            flightStatus === "EN ROUTE"
+              ? "bg-blue-100 text-blue-800"
+              : flightStatus === "LANDED"
+              ? "bg-green-100 text-green-800"
+              : "bg-gray-100 text-gray-500"
+          }`}
         >
           {flightStatus}
         </span>
@@ -44,4 +47,5 @@ const PanelHeader = () => {
     </div>
   );
 };
+
 export default PanelHeader;

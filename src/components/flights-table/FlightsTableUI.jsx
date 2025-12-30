@@ -1,8 +1,12 @@
 import { useContext, useState, useMemo } from "react";
 import { FlightsContext } from "../../Context/FlightsContext";
-import { getDirection } from "../../utils/getDirection";
 import { UIContext } from "../../Context/UIContext";
+import { getDirection } from "../../utils/getDirection";
 
+/**
+ * Interactive flights table.
+ * Supports client-side sorting and responsive density.
+ */
 const FlightsTableUI = () => {
   const { visibleFlightsArr } = useContext(FlightsContext);
   const { closeTable } = useContext(UIContext);
@@ -10,6 +14,7 @@ const FlightsTableUI = () => {
   const [sortingCol, setSortingCol] = useState("");
   const [sortingDirection, setSortingDirection] = useState("");
 
+  // Cycle sorting state: none → asc → desc → none
   const handleSort = (col) => {
     if (sortingCol !== col) {
       setSortingCol(col);
@@ -27,6 +32,7 @@ const FlightsTableUI = () => {
     }
   };
 
+  // Memoized client-side sorting for visible flights only
   const tableFlights = useMemo(() => {
     if (!sortingCol || sortingDirection === "") {
       return visibleFlightsArr;
@@ -74,24 +80,34 @@ const FlightsTableUI = () => {
     }`;
 
   return (
-    <div className="bottom-0 left-0 right-0 w-full h-[480px] bg-white border-t rounded-xl border-slate-200 shadow-2xl flex flex-col overflow-hidden">
+    <div
+      className="
+        bottom-0 left-0 right-0 w-full
+        h-[420px] md:h-[360px] lg:h-[480px]
+        bg-white border-t border-slate-200
+        rounded-xl shadow-2xl
+        flex flex-col overflow-hidden
+      "
+    >
       <div className="flex items-center justify-between px-6 py-3 border-b border-slate-200 bg-white">
         <h2 className="text-lg font-semibold text-slate-800">Live Flights</h2>
+
         <div className="text-sm text-slate-500">
           Showing {tableFlights.length} aircraft
         </div>
+
         <button
           onClick={closeTable}
           className="
-        w-8 h-8
-        flex items-center justify-center
-        rounded-full
-        text-slate-500
-        hover:text-slate-800
-        hover:bg-slate-200
-        transition
-        text-lg
-      "
+            w-8 h-8
+            flex items-center justify-center
+            rounded-full
+            text-slate-500
+            hover:text-slate-800
+            hover:bg-slate-200
+            transition
+            text-lg
+          "
           aria-label="Close table"
         >
           ✕

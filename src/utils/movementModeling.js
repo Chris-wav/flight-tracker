@@ -1,9 +1,11 @@
+// movementModeling.js
 export const movementModeling = (trueTrack, velocity, lat, lon, deltaTime) => {
   if (
     trueTrack == null ||
     velocity == null ||
     lat == null ||
     lon == null ||
+    deltaTime == null ||
     deltaTime <= 0
   ) {
     return { newLat: lat, newLon: lon };
@@ -16,20 +18,18 @@ export const movementModeling = (trueTrack, velocity, lat, lon, deltaTime) => {
   // ms → seconds
   const deltaSeconds = deltaTime / 1000;
 
-  // velocity is m/s → distance in meters
+  // velocity (m/s) → distance (m)
   const distance = velocity * deltaSeconds;
 
-  // local tangent plane
+  // local tangent plane (north/east meters)
   const northMovement = distance * Math.cos(angleRad);
   const eastMovement = distance * Math.sin(angleRad);
 
-  // meters per degree
   const METERS_PER_DEGREE = 111_320;
 
-  // latitude change
   const deltaLat = northMovement / METERS_PER_DEGREE;
 
-  // longitude change (with safe cos)
+  // safe cos to avoid exploding near poles
   const cosLat = Math.max(Math.cos(latRad), 0.01);
   const deltaLon = eastMovement / (METERS_PER_DEGREE * cosLat);
 
@@ -38,3 +38,4 @@ export const movementModeling = (trueTrack, velocity, lat, lon, deltaTime) => {
     newLon: lon + deltaLon,
   };
 };
+  

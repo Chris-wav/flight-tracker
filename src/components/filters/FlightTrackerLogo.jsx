@@ -1,7 +1,10 @@
+/**
+ * App logo component.
+ * Supports compact mode for constrained UI areas.
+ */
 const FlightTrackerLogo = ({ compact = false }) => {
   return (
     <div className="flex items-center gap-3 select-none">
-      {/* Logo mark */}
       <div
         className="
           h-10 w-10
@@ -16,7 +19,6 @@ const FlightTrackerLogo = ({ compact = false }) => {
         <span className="text-sky-600 text-lg">✈︎</span>
       </div>
 
-      {/* Wordmark */}
       {!compact && (
         <div className="leading-tight">
           <div className="text-slate-800 font-semibold tracking-tight">

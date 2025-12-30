@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import { UIContext } from "../../Context/UIContext";
 
+/**
+ * Collapsed table handle.
+ * Allows reopening the flights table from a minimal footer control.
+ */
 const FlightTableClosed = () => {
   const { openTable } = useContext(UIContext);
+
   return (
     <div
       className="
@@ -17,9 +22,10 @@ const FlightTableClosed = () => {
       "
     >
       <div
+        onClick={openTable}
         className="
           bg-white/80
-          backdrop-white
+          backdrop-blur
           border border-slate-200
           shadow-lg
           rounded-xl
@@ -29,7 +35,6 @@ const FlightTableClosed = () => {
           hover:bg-white
           hover:shadow-xl
         "
-        onClick={openTable}
       >
         <span className="text-sm font-medium text-slate-500 group-hover:text-slate-900">
           Open flights table

@@ -1,18 +1,22 @@
+import { useContext } from "react";
+import { UIContext } from "../../Context/UIContext";
 import PanelHeader from "./PanelHeader";
 import FlightAirports from "./FlightAirports";
 import FlightGeneralInfo from "./FlightGeneralInfo";
 import HeightInfo from "./HeightInfo";
 import FlightTrackingInfo from "./FlightTrackingInfo";
-import { UIContext } from "../../Context/UIContext";
-import { useContext } from "react";
 
+/**
+ * Main flight details panel.
+ * Displays detailed information for the selected aircraft.
+ */
 const FlightPanel = () => {
   const { closeFlightPanel } = useContext(UIContext);
 
   return (
     <div
       className="
-      min-w-0
+        min-w-0
         h-full
         w-full
         p-6
@@ -25,7 +29,6 @@ const FlightPanel = () => {
         relative
       "
     >
-      {/* Close button */}
       <button
         onClick={closeFlightPanel}
         className="
@@ -46,6 +49,7 @@ const FlightPanel = () => {
       </button>
 
       <PanelHeader />
+      <FlightAirports />
       <FlightGeneralInfo />
       <HeightInfo />
       <FlightTrackingInfo />

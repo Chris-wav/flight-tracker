@@ -8,24 +8,30 @@ import FlightTrackerLogo from "./FlightTrackerLogo";
 import { useContext } from "react";
 import { UIContext } from "../../Context/UIContext";
 
+/**
+ * Main filters sidebar.
+ * Desktop: fixed sidebar
+ * Mobile: full-screen overlay
+ */
 const FiltersBar = () => {
   const { toggleFilters } = useContext(UIContext);
+
   return (
     <div
       className="
-        w-[380px]
+        w-full lg:w-[380px]
+        h-full
         p-6
         flex flex-col
         space-y-6
-        bg-white/60
+        bg-white/90
         backdrop-blur-xl
         border-r border-gray-300/40
         overflow-y-auto
         relative
-        z-[999]
       "
     >
-      {/* Collapse button (UI only) */}
+      {/* Collapse / hide filters */}
       <button
         className="
           absolute top-4 right-4
@@ -47,9 +53,9 @@ const FiltersBar = () => {
         onClick={toggleFilters}
       >
         <div className="flex gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-gray-500"></span>
-          <span className="w-1.5 h-1.5 rounded-full bg-gray-500"></span>
-          <span className="w-1.5 h-1.5 rounded-full bg-gray-500"></span>
+          <span className="w-1.5 h-1.5 rounded-full bg-gray-500" />
+          <span className="w-1.5 h-1.5 rounded-full bg-gray-500" />
+          <span className="w-1.5 h-1.5 rounded-full bg-gray-500" />
         </div>
       </button>
 

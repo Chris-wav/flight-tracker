@@ -1,8 +1,12 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { FlightsContext } from "../../Context/FlightsContext";
 import { getVerticalRate } from "../../utils/getVerticalStatus";
 import { getVerticalArrow } from "../../utils/getVerticalStatusArrow";
 
+/**
+ * Displays vertical movement status (climb / descent / level),
+ * including rate and SPI indicator.
+ */
 const HeightInfo = () => {
   const { selectedFlight } = useContext(FlightsContext);
 
@@ -18,12 +22,11 @@ const HeightInfo = () => {
     <div className="w-full bg-white rounded-xl p-4 shadow-lg ring-1 ring-black/5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-          <span className="text-lg">{verticalArrow}</span>
+          <span className="text-lg">{verticalArrow ?? "—"}</span>
           <span className="uppercase tracking-wide">
             {verticalStatus ?? "—"}
           </span>
         </div>
-
 
         <div
           className={`

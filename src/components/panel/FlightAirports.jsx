@@ -1,21 +1,23 @@
-import React, { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { FlightsContext } from "../../Context/FlightsContext";
 
+/**
+ * Displays basic route information (departure → arrival)
+ * for the currently selected flight.
+ */
 const FlightAirports = () => {
   const { routeInfo } = useContext(FlightsContext);
-  useEffect(() => {
-    console.log(routeInfo);
-  }, [routeInfo]);
+
   return (
     <div className="w-full max-w-md p-4 bg-white rounded-xl flex flex-col gap-4 shadow-lg ring-1 ring-black/5">
-      <div className="flex justify-between text-sm font-semibold text-gray-700 ">
+      <div className="flex justify-between text-sm font-semibold text-gray-700">
         {!routeInfo ? (
           <div className="p-4 text-sm text-gray-500">Loading route…</div>
         ) : (
           <>
-            <span>{routeInfo.arrival}</span>
-            <span className="mx-3 text-l font-bold text-gray-500">→</span>
             <span>{routeInfo.departure ?? "UNKNOWN"}</span>
+            <span className="mx-3 text-lg font-bold text-gray-500">→</span>
+            <span>{routeInfo.arrival}</span>
           </>
         )}
       </div>

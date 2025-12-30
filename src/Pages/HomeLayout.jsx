@@ -12,28 +12,42 @@ const HomeLayout = () => {
     useContext(UIContext);
 
   return (
-    <div className="flex w-full h-full overflow-hidden relative flex-1">
-      {isFiltersOpen ? (
-        <FiltersBar />
-      ) : (
-        <div className="absolute top-4 left-20 z-[1000]">
+    <div className="flex w-full h-[100dvh] overflow-hidden relative">
+      {/* FILTERS */}
+      {isFiltersOpen && (
+        <div className="absolute inset-0 z-[1000] lg:static lg:inset-auto">
+          <FiltersBar />
+        </div>
+      )}
+
+      {!isFiltersOpen && (
+        <div
+          className="absolute
+        top-4
+        left-14
+        z-[1000]"
+        >
           <FiltersCollapsedIndicator />
         </div>
       )}
 
-      {/* MAIN AREA */}
-      <div className="flex flex-col flex-1 ">
+      {/* MAIN */}
+      <div className="flex flex-col flex-1 relative">
         <Map />
-        {isTableOpen ? <FlightsTableUI /> : <FlightTableClosed />}
+
+        <div className="hidden lg:block">
+          {isTableOpen ? <FlightsTableUI /> : <FlightTableClosed />}
+        </div>
       </div>
 
       {/* RIGHT PANEL */}
       {isFlightPanelOpen && (
-        <div className="w-[350px] flex-shrink-0">
+        <div className="absolute inset-0 z-[1100] bg-white lg:static lg:w-[350px] lg:bg-transparent">
           <FlightPanel />
         </div>
       )}
     </div>
   );
 };
+
 export default HomeLayout;

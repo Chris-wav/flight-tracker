@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { FlightsContext } from "../Context/FlightsContext";
-import { getPlaneIcon } from "../utils/getPlaneIcon";
+import { getPlaneIcon} from "../utils/getPlaneIcon";
 import { Marker } from "react-leaflet";
 import {
   getAnimatedState,
