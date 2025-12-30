@@ -157,3 +157,5 @@ Follow basic security best practices
 ✅ Status
 
 Production-ready and portfolio-approved.
+
+Future improvements: Better view for the flights that are in veiwport
