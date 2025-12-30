@@ -18,8 +18,6 @@ const MapLogic = () => {
     };
 
     map.addEventListener("moveend", handleMoveEnd);
-    console.log(flights);
-    console.log("visible flights: ", visibleFlightsArr);
 
     return () => {
       map.removeEventListener("moveend", handleMoveEnd);
